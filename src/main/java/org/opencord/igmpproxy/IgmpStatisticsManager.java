@@ -129,6 +129,10 @@ public class IgmpStatisticsManager extends
             log.debug("--Igmpv3MembershipReport--" + igmpStats.getIgmpv3MembershipReport());
             log.debug("--InvalidIgmpMsgReceived--" + igmpStats.getInvalidIgmpMsgReceived());
             log.debug("--TotalMsgReceived--  " + igmpStats.getTotalMsgReceived());
+
+            log.debug("--TotalMsgReceived--  " + igmpStats.getTotalMsgReceived());
+            log.debug("--TotalMsgReceived--  " + igmpStats.getTotalMsgReceived());
+            log.debug("--TotalMsgReceived--  " + igmpStats.getTotalMsgReceived());
         }
 
         post(new IgmpStatisticsEvent(IgmpStatisticsEvent.Type.STATS_UPDATE, igmpStats));

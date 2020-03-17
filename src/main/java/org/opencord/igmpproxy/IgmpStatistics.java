@@ -51,6 +51,20 @@ public class IgmpStatistics {
     //Total number of invalid IGMP messages received
     private AtomicLong invalidIgmpMsgReceived = new AtomicLong();
 
+    //Total number of general IGMP membership query messages received
+    private AtomicLong igmpGeneralMembershipQuery = new AtomicLong();
+    //Total number of group specific IGMP membership query messages received
+    private AtomicLong igmpGrpSpecificMembershipQuery = new AtomicLong();
+    //Total number of group and source specific IGMP membership query messages received
+    private AtomicLong igmpGrpAndSrcSpecificMembershipQuery = new AtomicLong();
+    /*
+    //Total number of identified connected groups
+    private AtomicLong identifiedConnectedGroups = new AtomicLong();
+    //Total number of unidentified connected groups
+    private AtomicLong unidentifiedConnectedGroups = new AtomicLong();
+    //Total number of connected groups in reserved state
+    private AtomicLong reservedConnectedGroups = new AtomicLong();
+    */
     public Long getIgmpJoinReq() {
         return igmpJoinReq.get();
     }
@@ -121,6 +135,30 @@ public class IgmpStatistics {
 
     public void increaseIgmpDisconnect() {
         igmpDisconnect.incrementAndGet();
+    }
+
+    public Long getIgmpGeneralMembershipQuery() {
+        return igmpGeneralMembershipQuery.get();
+    }
+
+    public Long getIgmpGrpSpecificMembershipQuery() {
+        return igmpGrpSpecificMembershipQuery.get();
+    }
+
+    public Long getIgmpGrpAndSrcSpecificMembershipQuery() {
+        return igmpGrpAndSrcSpecificMembershipQuery.get();
+    }
+
+    public void increaseIgmpGeneralMembershipQuery() {
+        igmpGeneralMembershipQuery.incrementAndGet();
+    }
+
+    public void increaseIgmpGrpSpecificMembershipQuery() {
+        igmpGrpSpecificMembershipQuery.incrementAndGet();
+    }
+
+    public void increaseIgmpGrpAndSrcSpecificMembershipQuery() {
+        igmpGrpAndSrcSpecificMembershipQuery.incrementAndGet();
     }
 
     public void increaseIgmpv3MembershipQuery() {

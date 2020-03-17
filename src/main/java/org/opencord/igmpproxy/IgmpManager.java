@@ -268,8 +268,10 @@ public class IgmpManager {
         maxResp = calculateMaxResp(maxResp);
         if (gAddr != null && !gAddr.isZero()) {
             StateMachine.specialQuery(deviceId, gAddr, maxResp);
+            igmpStatisticsManager.getIgmpStats().increaseIgmpGrpSpecificMembershipQuery();
         } else {
             StateMachine.generalQuery(deviceId, maxResp);
+            igmpStatisticsManager.getIgmpStats().increaseIgmpGeneralMembershipQuery();
         }
     }
 
@@ -284,12 +286,14 @@ public class IgmpManager {
                 Optional<SubscriberAndDeviceInformation> accessDevice = getSubscriberAndDeviceInformation(device.id());
                 if (accessDevice.isPresent()) {
                     StateMachine.specialQuery(device.id(), gAddr, maxResponseTime);
+                    igmpStatisticsManager.getIgmpStats().increaseIgmpGrpAndSrcSpecificMembershipQuery();
                 }
             });
         } else {
             //Don't know which group is targeted by the query
             //So query all the members(in all the OLTs) and proxy their reports
             StateMachine.generalQuery(maxResponseTime);
+            igmpStatisticsManager.getIgmpStats().increaseIgmpGeneralMembershipQuery();
         }
     }
 
@@ -468,7 +472,7 @@ public class IgmpManager {
                     if (ethPkt == null) {
                         return;
                     }
-                    igmpStatisticsManager.getIgmpStats().increaseTotalMsgReceived();
+                //    igmpStatisticsManager.getIgmpStats().increaseTotalMsgReceived();
 
                     if (ethPkt.getEtherType() != Ethernet.TYPE_IPV4) {
                         return;
@@ -540,6 +544,7 @@ public class IgmpManager {
 
                 } catch (Exception ex) {
                     log.error("igmp process error : {} ", ex);
+                    ex.printStackTrace();
                 }
             });
         }
